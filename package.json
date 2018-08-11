@@ -12,6 +12,14 @@
     "tdd": "mocha -w -r esm test/specs.js",
     "prepublish": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fuzhenn/frustum-intersects.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fuzhenn/frustum-intersects/issues"
+  },
+  "homepage": "https://github.com/fuzhenn/frustum-intersects",
   "files": [
     "src"
   ],
