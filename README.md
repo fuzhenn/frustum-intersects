@@ -1,5 +1,7 @@
 # Frustum-Intersects
 
+[![NPM Version](https://img.shields.io/npm/v/frustum-intersects.svg)](https://github.com/fuzhenn/frustum-intersects) [![CircleCI](https://circleci.com/gh/fuzhenn/frustum-intersects.svg?style=shield)](https://circleci.com/gh/fuzhenn/frustum-intersects)
+
 A zero-dependency lib extracted from [THREE.js](https://github.com/mrdoob/three.js) to determine if camera's frustum intersects with given box or sphere.
 
 ## Usage
