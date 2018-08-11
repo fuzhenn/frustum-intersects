@@ -41,13 +41,13 @@ const ret = frustum.intersectsBox(matrix, box);
 
 ## API
 
-`intersectsBox(matrix, box, mask)`
+### intersectsBox(matrix, box, mask)
 
 * `matrix` camera's 4x4 projection view matrix array, compatible with gl-matrix
 * `box` the aabb box, [[minx, miny, minz], [maxx, maxy, maxz]]
 * `mask` A 6 chars string mask (e.g. `"111111"`) of frustum planes, plane with mask of `0` will always return `true`
 
-`intersectsSphere(matrix, sphere, mask)`
+### intersectsSphere(matrix, sphere, mask)
 
 * `matrix` camera's 4x4 projection view matrix array, compatible with gl-matrix
 * `sphere` sphere, [[centerx, centery, centerz], radius]
