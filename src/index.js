@@ -47,6 +47,48 @@ export function intersectsBox(matrix, box, mask) {
     return true;
 }
 
+export function intersectsOrientedBox(matrix, box, mask) {
+    setPlanes(matrix);
+    for (var i = 0; i < 6; i++) {
+        if (mask && mask.charAt(i) === '0') {
+            continue;
+        }
+        var plane = planes[i];
+        if (!intersectsPlane(plane, box)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+const COLUMN0ROW0 = 0, COLUMN0ROW1 = 3, COLUMN0ROW2 = 6, COLUMN1ROW0 = 1, COLUMN1ROW1 = 4, COLUMN1ROW2 = 7, COLUMN2ROW0 = 2, COLUMN2ROW1 = 5, COLUMN2ROW2 = 8;
+// const COLUMN0ROW0 = 0, COLUMN0ROW1 = 1, COLUMN0ROW2 = 2, COLUMN1ROW0 = 3, COLUMN1ROW1 = 4, COLUMN1ROW2 = 5, COLUMN2ROW0 = 6, COLUMN2ROW1 = 7, COLUMN2ROW2 = 8;
+
+function intersectsPlane(plane, box) {
+    var center = box.slice(0, 3);
+    var normal = plane;
+    var halfAxes = box.slice(3);
+    var normalX = normal[0], normalY = normal[1], normalZ = normal[2];
+    // plane is used as if it is its normal; the first three components are assumed to be normalized
+    var radEffective = Math.abs(normalX * halfAxes[COLUMN0ROW0] + normalY * halfAxes[COLUMN0ROW1] + normalZ * halfAxes[COLUMN0ROW2]) +
+                       Math.abs(normalX * halfAxes[COLUMN1ROW0] + normalY * halfAxes[COLUMN1ROW1] + normalZ * halfAxes[COLUMN1ROW2]) +
+                       Math.abs(normalX * halfAxes[COLUMN2ROW0] + normalY * halfAxes[COLUMN2ROW1] + normalZ * halfAxes[COLUMN2ROW2]);
+    var distanceToPlane = distanceToPoint(plane, center);
+
+    if (distanceToPlane <= -radEffective) {
+        // The entire box is on the negative side of the plane normal
+        // return Intersect.OUTSIDE;
+        return false;
+    } else if (distanceToPlane >= radEffective) {
+        // The entire box is on the positive side of the plane normal
+        // return Intersect.INSIDE;
+        return true;
+    }
+    return true;
+    // return Intersect.INTERSECTING;
+}
+
 function setPlanes(m) {
     var me = m;
     var me0 = me[0], me1 = me[1], me2 = me[2], me3 = me[3];
