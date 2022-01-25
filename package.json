@@ -8,8 +8,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dev": "rollup -w -c rollup.config.js",
-    "test": "mocha -r esm test/specs.js",
-    "tdd": "mocha -w -r esm test/specs.js",
+    "test": "mocha -r @babel/register test/specs.js",
+    "tdd": "mocha -w -r @babel/register test/specs.js",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -31,9 +31,12 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "esm": "^3.0.74",
     "mocha": "^5.2.0",
     "rollup": "^0.64.1",
-    "rollup-plugin-uglify": "^4.0.0"
+    "rollup-plugin-uglify": "^4.0.0",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4"
   }
 }

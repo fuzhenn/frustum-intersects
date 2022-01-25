@@ -64,11 +64,27 @@ export function intersectsOrientedBox(matrix, box, mask) {
 
 var COLUMN0ROW0 = 0, COLUMN0ROW1 = 3, COLUMN0ROW2 = 6, COLUMN1ROW0 = 1, COLUMN1ROW1 = 4, COLUMN1ROW2 = 7, COLUMN2ROW0 = 2, COLUMN2ROW1 = 5, COLUMN2ROW2 = 8;
 // const COLUMN0ROW0 = 0, COLUMN0ROW1 = 1, COLUMN0ROW2 = 2, COLUMN1ROW0 = 3, COLUMN1ROW1 = 4, COLUMN1ROW2 = 5, COLUMN2ROW0 = 6, COLUMN2ROW1 = 7, COLUMN2ROW2 = 8;
+var BOX_CENTER = [];
+var HALF_AXES = [];
 
 function intersectsPlane(plane, box) {
-    var center = box.slice(0, 3);
+    BOX_CENTER[0] = box[0];
+    BOX_CENTER[1] = box[1];
+    BOX_CENTER[2] = box[2];
+
+    HALF_AXES[0] = box[3];
+    HALF_AXES[1] = box[4];
+    HALF_AXES[2] = box[5];
+    HALF_AXES[3] = box[6];
+    HALF_AXES[4] = box[7];
+    HALF_AXES[5] = box[8];
+    HALF_AXES[6] = box[9];
+    HALF_AXES[7] = box[10];
+    HALF_AXES[8] = box[11];
+
+    var center = BOX_CENTER;
     var normal = plane;
-    var halfAxes = box.slice(3);
+    var halfAxes = HALF_AXES;
     var normalX = normal[0], normalY = normal[1], normalZ = normal[2];
     // plane is used as if it is its normal; the first three components are assumed to be normalized
     var radEffective = Math.abs(normalX * halfAxes[COLUMN0ROW0] + normalY * halfAxes[COLUMN0ROW1] + normalZ * halfAxes[COLUMN0ROW2]) +
@@ -110,12 +126,13 @@ function setPlanes(m) {
     setComponents(planes[5], me3 + me2, me7 + me6, me11 + me10, me15 + me14);
 }
 
-var normalLength = 1.0 / 6;
 function setComponents(out, x, y, z, w) {
-    out[0] = x * normalLength;
-    out[1] = y * normalLength;
-    out[2] = z * normalLength;
-    out[3] = w * normalLength;
+    // THREE.js Plane.js
+    var inverseNormalLength = 1 / Math.sqrt(x * x + y * y + z * z);
+    out[0] = x * inverseNormalLength;
+    out[1] = y * inverseNormalLength;
+    out[2] = z * inverseNormalLength;
+    out[3] = w * inverseNormalLength;
     return out;
 }
 
