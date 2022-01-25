@@ -1,6 +1,6 @@
 {
   "name": "frustum-intersects",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Determines if camera's frustum intersects with aabb box and sphere",
   "main": "dist/frustum-intersects.js",
   "module": "src/index.js",
