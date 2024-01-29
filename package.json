@@ -10,7 +10,7 @@
     "dev": "rollup -w -c rollup.config.js",
     "test": "mocha -r @babel/register test/specs.js",
     "tdd": "mocha -w -r @babel/register test/specs.js",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
