@@ -92,6 +92,7 @@ function intersectsPlane(plane, box) {
 }
 
 function setPlanes(m) {
+    //explanation: https://gamedev.stackexchange.com/questions/156743/finding-the-normals-of-the-planes-of-a-view-frustum
     var me = m;
     var me0 = me[0], me1 = me[1], me2 = me[2], me3 = me[3];
     var me4 = me[4], me5 = me[5], me6 = me[6], me7 = me[7];
